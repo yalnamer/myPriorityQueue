@@ -60,20 +60,30 @@ void PriorityQueue::remove(Person person)
 {
 	for (int i = 0; i < size; i++)
 	{
-		if ((queue[i].name == person.name) && (queue[i].priority == person.priority))
+		if ((queue[i].name == person.name))
 		{
+			//Swap spots with end of list
 			Person temp = queue[end];
 			queue[end] = queue[i];
 			queue[i] = temp;
+
+			//Maintain heap invaraintg
 			bubbleDown(i);
+
+			//Update size and end index
 			size--;
 			end--;
+
+			std::cout << "[+] " << person.name << " has been removed.\n";
 			return;
 		}
 	}
+
+	std::cout << "[+] " << person.name << " has not been found.\n";
 }
 
 int PriorityQueue::getSize()
+
 {
 	return size;
 }
@@ -88,11 +98,11 @@ bool PriorityQueue::isFull()
 
 void PriorityQueue::print()
 {
-	std::cout << "[+] Printing names in queue\n";
+	std::cout << "  [+] Printing names in queue\n";
 
 	for(int i = 0; i < size; i++)
 	{
-		std::cout << "  [-] " << queue[i].name << std::endl;
+		std::cout << "    [-] " << queue[i].name << std::endl;
 	}
 
 }
